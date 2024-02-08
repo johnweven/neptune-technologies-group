@@ -39,7 +39,6 @@
 //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 #include <iostream>
-#include <string>
 
 using namespace std;
 
@@ -67,13 +66,9 @@ int main()
     finalPrice = mkupPrice + salesTax;
     cout << "The final price = $" << finalPrice << endl;
 
-    // FIXME: For some reason the following "press any key to exit" code segment doesn't work as expected.
-    //        I asked the professor for assistance, since it's required in the exercise instructions.
-    /*
-        char q;
-        cout << "\nPress any key to Exit.";
-        cin.ignore(2, '\n');
-        cin.get(q);
-    */
+    char q;
+    cout << "\nPress any key to Exit.";
+    cin.ignore(2, '\n');
+    cin.get(q);
     return 0;
 }
