@@ -2,29 +2,25 @@
 //*                                                                                                       *
 //* Program name    : L1-3.cpp                                                                            *
 //*                                                                                                       *
-//* Written by      : John Weaver                                                                         *
+//* Written by      : Adam Karsner & John Weaver                                                          *
 //*                                                                                                       *
-//* Purpose         : This program will prompt the user to Insert the card from the bank, it will then    *
-//*                   retrieve the user’s balance, if the balance is negative or zero the program will    *
-//*                   display the prompt “No funds available”.If the user has funds the program will      *
-//*                   continue to run.The program will display the display the 4% and $25 fee if certain  * 
-//*                   conditions are met. Then prompt the user to input an amount of withdrawal less      *
-//*                   than $500. The program will calculate the users withdrawal cost, services fees      *
-//*                   (if applicable), and their balance after the withdrawal, these values will be       *
-//*                   displayed to the user. The user will be given the final prompt of verification of   *
-//*                   the transaction.                                                                    *
+//* Purpose         :                                                                                     *
 //*                                                                                                       *
-//* Inputs          : 1. The user's bank balance.                                                         *
-//*                   2. The user's withdrawal amount.                                                    *
+//* Inputs          :                                                                                     *
 //*                                                                                                       *
-//* Outputs         : 1. Display the value of the user's balance.                                         *
+//* Outputs         :                                                                                     *
 //*                                                                                                       *
-//* Calls           : No internal or external calls.                                                      *
+//* Calls           : No internal or external calls                                                       *
 //*                                                                                                       *
 //* Structure       : BEGIN                                                                               *
 //*                        Monolithic code w/no subprocesses                                              *
 //*                   STOP                                                                                *
 //*                        End of program                                                                 *
+//*                                                                                                       *
+//* IMPORTANT NOTE!!: The lab instructions for this exercise gives input data for 4 employees. However,   *
+//*                   to get the same output as the screenshot displayed in the Lab1 Mockup document,     *
+//*                   the data for the 4th employee had to be excluded from the calculations for finding  *
+//*                   the total of the employees' current salary versus the total of their new salaries.  *
 //*                                                                                                       *
 //*-------------------------------------------------------------------------------------------------------*
 //*                                                                                                       *
@@ -33,93 +29,111 @@
 //*                          Elijah Topete                                                                *
 //*                          John Weaver                                                                  *
 //*                          Sebastian Tiberos Cruz                                                       *
+//*                   Help from professor John Urrutia of SCC, CIS-022 Spring 2024                        *
 //*                                                                                                       *
 //*-------------------------------------------------------------------------------------------------------*
 //*                                                                                                       *
 //* Change Log:                                                                                           *
-//*                                   Revision Info                                                       *
-//*       Date:   Author:      Rel.  Ver.  Mod.  Purpose:                                                 *
-//*  02/08/2024   jweaver      001   001   000   Initial release.                                         *
+//*                                             Revision Info                                             *
+//*       Date:   Author:                   Rel.  Ver.  Mod.  Purpose:                                    *
+//*  02/08/2024   akarsner & jweaver     001   001   000   Initial release.                               *
 //*                                                                                                       *
 //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-#include <iostream>
-#include <iomanip>
+# include <iostream>
+# include <fstream>
+# include <string>
+# include <iomanip>
 
 using namespace std;
 
-int main() {
+int main()
+{
+	// Declare variables.
+	string firstName1,
+		lastName1,
+		firstName2,
+		lastName2,
+		firstName3,
+		lastName3,
+		firstName4,
+		lastName4;
+	double currentSalary1,
+		percPayIncrease1,
+		newSalary1,
+		currentSalary2,
+		percPayIncrease2,
+		newSalary2,
+		currentSalary3,
+		percPayIncrease3,
+		newSalary3,
+		currentSalary4,
+		percPayIncrease4,
+		newSalary4,
+		employeeCurrentSalaryTotal,
+		employeeNewSalaryTotal;
+
+	// Declare filestream variables.
+	ifstream inData;
+	ofstream outData;
 
 	// Display the source author and program information.
-	cout << "John Weaver\t" << "L1-3\t" << "L1-3.exe" << endl;
+	cout << "Adam Karsner & John Weaver\t" << "L1-3\t" << "L1-3.exe" << endl;
+	
+	// Open "L1-3DATA.dat" for reading.
+	inData.open("L1-3DATA.dat", ios::in);
+	outData.open("L1-3Output.dat", ios::out);
 
-    // Declare variables.
-    double accountBalance;
-    cout << "Enter your account balance in dollars: ";
-    cin >> accountBalance;
+	// Set the output file stream manipulators to show decimals with a precision of 2.
+	outData << fixed << showpoint << setprecision(2);
 
-    double withdrawalAmount;
-    cout << "Enter the amount you wish to withdraw in dollars: ";
-    cin >> withdrawalAmount;
+	// Read in each line of employee data from the input file, calculate each employee's
+	// salary increase based on the data read, then write each employee's first/last name
+	// and their new salary to the output file.
 
-    // Declare constants.
-    const double dailyLimit = 500.0;
-    const double serviceChargeThreshold = 300.0;
-    const double serviceChargeRate = 0.04; // 4% charge
-    const double insufficientFundsCharge = 25.0;
+	cout << fixed << showpoint << setprecision(2);
 
-    // Check for withdrawal limit.
-    if (withdrawalAmount > dailyLimit) {
-        cout << "Error: The maximum amount that can be withdrawn per day is 500 dollars." << endl;
-    } else if (withdrawalAmount > accountBalance) {
-        // Check for insufficient funds without considering service charge.
-        cout << "Warning: Insufficient funds in your account." << endl;
-        if (accountBalance > 0) {
-            // Customer can still opt for withdrawal with a service charge if the account balance is positive.
-            cout << "You can opt to withdraw up to " << accountBalance << " dollars with an additional service charge of 25 dollars. Proceed? (yes/no): ";
-            string response;
-            cin >> response;
-            if (response == "yes" || response == "Yes") {
-                if (accountBalance - insufficientFundsCharge >= 0) {
-                    // Apply service charge and withdraw all money.
-                    accountBalance -= insufficientFundsCharge;
-                    cout << "Transaction successful: " << accountBalance << " dollars have been withdrawn." << endl;
-                    accountBalance = 0; // All money withdrawn.
-                    cout << "Your new account balance is 0 dollars." << endl;
-                } else {
-                    cout << "Error: Insufficient funds to cover the service charge." << endl;
-                }
-            } else {
-                cout << "Withdrawal cancelled." << endl;
-            }
-        } else {
-            // Account balance is zero or negative.
-            cout << "Error: Your account balance is insufficient for any withdrawal." << endl;
-        }
-    } else {
-        // Calculate service charge if applicable.
-        double serviceCharge = 0.0;
-        if (withdrawalAmount > serviceChargeThreshold) {
-            serviceCharge = (withdrawalAmount - serviceChargeThreshold) * serviceChargeRate;
-        }
+	// Employee 1:
+    inData >> lastName1 >> firstName1 >> currentSalary1 >> percPayIncrease1;
+	newSalary1 = currentSalary1 + (currentSalary1 * (percPayIncrease1 / 100));
+	outData << firstName1 << " " << lastName1 << " " << newSalary1 << endl;
+	cout << firstName1 << " " << lastName1 << " " << newSalary1 << endl;
 
-        // Check if account balance can cover the withdrawal amount plus service charge.
-        if (accountBalance >= withdrawalAmount + serviceCharge) {
-            accountBalance -= (withdrawalAmount + serviceCharge);
-            cout << fixed << setprecision(2);
-            cout << "Transaction successful: " << withdrawalAmount << " dollars have been withdrawn." << endl;
-            cout << "Service charge applied: " << serviceCharge << " dollars." << endl;
-            cout << "Your new account balance is " << accountBalance << " dollars." << endl;
-        } else {
-            cout << "Error: Insufficient funds to cover the withdrawal and the service charge." << endl;
-        }
-    }
+	// Employee 2:
+	inData >> lastName2 >> firstName2 >> currentSalary2 >> percPayIncrease2;
+	newSalary2 = currentSalary2 + (currentSalary2 * (percPayIncrease2 / 100));
+	outData << firstName2 << " " << lastName2 << " " << newSalary2 << endl;
+	cout << firstName2 << " " << lastName2 << " " << newSalary2 << endl;
+
+	// Employee 3:
+	inData >> lastName3 >> firstName3 >> currentSalary3 >> percPayIncrease3;
+	newSalary3 = currentSalary3 + (currentSalary3 * (percPayIncrease3 / 100));
+	outData << firstName3 << " " << lastName3 << " " << newSalary3 << endl;
+	cout << firstName3 << " " << lastName3 << " " << newSalary3 << endl;
+
+	// Employee 4:
+	inData >> lastName4 >> firstName4 >> currentSalary4 >> percPayIncrease4;
+	newSalary4 = currentSalary4 + (currentSalary4 * (percPayIncrease4 / 100));
+	outData << firstName4 << " " << lastName4 << " " << newSalary4 << endl;
+	cout << firstName4 << " " << lastName4 << " " << newSalary4 << endl;
+
+	// Calculate and display the totals of the first three employees' base salaries vs.
+	// their new salaries.
+	employeeCurrentSalaryTotal = currentSalary1 + currentSalary2 + currentSalary3;
+	employeeNewSalaryTotal = newSalary1 + newSalary2 + newSalary3;
+	cout << fixed << showpoint << setprecision(2);
+	cout << "\t\tCurrent total Salary: $" << employeeCurrentSalaryTotal << endl;
+	cout << "\t\tUpdated total Salary: $" << employeeNewSalaryTotal << endl;
+	cout << endl;
+
+	// Close input and output files.
+	inData.close();
+	outData.close();
 
 	// Wait for user to press Enter before exiting the program.
 	char q;
-	cout << "\n\nPress Enter to exit.";
-	cin.ignore(2, '\n');
+	cout << "Press Enter to exit.";
 	cin.get(q);
 
-    return 0;
+	return 0;
 }
