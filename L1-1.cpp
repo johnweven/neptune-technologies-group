@@ -67,12 +67,12 @@ int main()
     cout << "The value of num1 = " << num1 << " and the value of num2 = " << num2 << "." << endl;
     newNum = (num1 * 2) + num2;
     cout << "The value of newNum = " << newNum << endl;
-    newNum = newNum + SECRET;
+    newNum += SECRET;
     cout << "The new value of newNum = " << newNum << endl << endl;
     cout << "Enter last name: ";
     cin >> name;
     cout << endl;
-    cout << "Enter a decimal number between 0 and 70: ";
+    cout << "Enter a decimal number between 0 and 100: ";
     cin >> hoursWorked;
     cout << endl;
     wages = RATE * hoursWorked;
@@ -81,13 +81,10 @@ int main()
     cout << "Hours Worked: " << hoursWorked << endl;
     cout << "Salary: $" << wages << endl;
 
-// FIXME: For some reason the following "press any key to exit" code segment doesn't work as expected.
-//        I asked the professor for assistance, since it's required in the exercise instructions.
-/*
     char q;
     cout << "\nPress any key to Exit.";
     cin.ignore(2, '\n');
     cin.get(q);
-*/
+
     return 0;
 }
