@@ -39,6 +39,7 @@
 //*                                   Revision Info                                                       *
 //*       Date:   Author:      Rel.  Ver.  Mod.  Purpose:                                                 *
 //*  02/08/2024   akarsner     001   001   000   Initial release.                                         *
+//*  02/08/2024   akarsner     001   002   000   Some minor styling changes                               *
 //*                                                                                                       *
 //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
@@ -68,14 +69,17 @@ int main()
 	// Prompt the user to enter the length of the yard in feet.
 	cout << "Enter the length of the yard in feet: ";
 	cin >> yardLength;
+	cout << endl;
 
 	// Prompt the user to enter the radius of the fully grown tree in inches.
-	cout << "\nEnter the radius in inches of the fully grown tree: ";
+	cout << "Enter the radius in inches of the fully grown tree: ";
 	cin >> treeRadiusInInches;
+	cout << endl;
 
 	// Prompt the user to enter the desired distance in feet between fully grown trees.
-	cout << "\nEnter the distance in feet between fully grown trees: ";
+	cout << "Enter the distance in feet between fully grown trees: ";
 	cin >> treeSpacing;
+	cout << endl << endl;
 
 	// Convert the entered radius of the fully grown tree from inches into feet.
 	treeRadiusInFeet = treeRadiusInInches / 12;
@@ -90,13 +94,13 @@ int main()
 	numPlantableTrees = (yardLength / treeSpaceWidth);
 
 	// Display the total number of plantable trees.
-	cout << "\n\nThe number of trees that can be planted: " << setprecision(1) << numPlantableTrees;
+	cout << "The number of trees that can be planted: " << setprecision(1) << numPlantableTrees;
 
 	// Calculate the total area of space occupied by all planted fully grown trees in feet.
 	totalAreaOfTrees = treeArea * numPlantableTrees;
 
 	//Display the total area of space occupied by planted fully grown trees.
-	cout << "\nTotal area occupied by the trees: " << setprecision(3) << showpoint << totalAreaOfTrees;
+	cout << "\nTotal area occupied by the trees: " << setprecision(3) << showpoint << totalAreaOfTrees << endl;
 
 	// Wait for user to press Enter before exiting the program.
 	char q;
