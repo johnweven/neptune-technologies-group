@@ -53,7 +53,7 @@ int main() {
 	// Display the source author and program information.
 	cout << "John Weaver\t" << "L1-3\t" << "L1-3.exe" << endl;
 
-    // Declare Variables.
+    // Declare variables.
     double accountBalance;
     cout << "Enter your account balance in dollars: ";
     cin >> accountBalance;
@@ -62,6 +62,7 @@ int main() {
     cout << "Enter the amount you wish to withdraw in dollars: ";
     cin >> withdrawalAmount;
 
+    // Declare constants.
     const double dailyLimit = 500.0;
     const double serviceChargeThreshold = 300.0;
     const double serviceChargeRate = 0.04; // 4% charge
