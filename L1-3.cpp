@@ -5,16 +5,21 @@
 //* Written by      : Adam Karsner & John Weaver                                                          *
 //*                                                                                                       *
 //* Purpose         : The purpose of this program is to read the current salary and salary increase       *
-//*                   of a number of employees from a file, determine each employee's new salary based    *
-//*                   on the input data, and then writes the resulting new salary to a output file.       *
+//*                   percentage for a number of employees from a file, determine each employee's new     *
+//*                   salary based on the input data, and then writes the resulting new salary to an      *
+//*                   output file.  The program also informs the user of the combined total of the        *
+//*                   employees' current salaries, as well as the combined totals of their new            *
+//*                   salaries.                                                                           *
 //*                                                                                                       *
-//* Inputs          : A data file containing a number of employee first and last names, their current     *
-//*                   salaries, and the percentages that each employee's salary is to be increased.       *
+//* Inputs          : A data file "L1-3DATA.dat" containing a number of employees' first and last         *
+//*                   names, their current salaries, and the percentages that each employee's salary      *
+//*                   is to be increased.                                                                 *
 //*                                                                                                       *
-//* Outputs         : 1. An output file containing the names and new salaries of every employee that      *
-//*                      was processed from the input file.                                               *
-//*                   2. The total of the combined current salaries of the employees.                     *
-//*                   3. The updated total of the combined employee salaries after salary increases.      *
+//* Outputs         : 1. An output file "L1-3Output.dat" containing the first and last names, and the     *
+//*                      new salary of every employee that was processed from the input file.             *
+//*                   2. The total of the combined current salaries of the processed employees.           *
+//*                   3. The updated total of the combined updated salaries for every processed           *
+//*                      employee after salary increases have been calculated and applied.                *
 //*                                                                                                       *
 //* Calls           : No internal or external calls                                                       *
 //*                                                                                                       *
@@ -22,11 +27,6 @@
 //*                        Monolithic code w/no subprocesses                                              *
 //*                   STOP                                                                                *
 //*                        End of program                                                                 *
-//*                                                                                                       *
-//* IMPORTANT NOTE!!: The lab instructions for this exercise gives input data for 4 employees. However,   *
-//*                   to get the same output as the screenshot displayed in the Lab1 Mockup document,     *
-//*                   the data for the 4th employee had to be excluded from the calculations for finding  *
-//*                   the total of the employees' current salary versus the total of their new salaries.  *
 //*                                                                                                       *
 //*-------------------------------------------------------------------------------------------------------*
 //*                                                                                                       *
@@ -61,9 +61,8 @@ int main()
 		firstName2,
 		lastName2,
 		firstName3,
-		lastName3,
-		firstName4,
-		lastName4;
+		lastName3;
+
 	double currentSalary1,
 		percPayIncrease1,
 		newSalary1,
@@ -73,9 +72,6 @@ int main()
 		currentSalary3,
 		percPayIncrease3,
 		newSalary3,
-		currentSalary4,
-		percPayIncrease4,
-		newSalary4,
 		employeeCurrentSalaryTotal,
 		employeeNewSalaryTotal;
 
@@ -86,7 +82,7 @@ int main()
 	// Display the source author and program information.
 	cout << "Adam Karsner & John Weaver\t" << "L1-3\t" << "L1-3.exe" << endl;
 	
-	// Open "L1-3DATA.dat" for reading.
+	// Open "L1-3DATA.dat" for input, and "L1-3Output.dat" for output.
 	inData.open("L1-3DATA.dat", ios::in);
 	outData.open("L1-3Output.dat", ios::out);
 
@@ -111,11 +107,6 @@ int main()
 	inData >> lastName3 >> firstName3 >> currentSalary3 >> percPayIncrease3;
 	newSalary3 = currentSalary3 + (currentSalary3 * (percPayIncrease3 / 100));
 	outData << firstName3 << " " << lastName3 << " " << newSalary3 << endl;
-
-	// Employee 4:
-	inData >> lastName4 >> firstName4 >> currentSalary4 >> percPayIncrease4;
-	newSalary4 = currentSalary4 + (currentSalary4 * (percPayIncrease4 / 100));
-	outData << firstName4 << " " << lastName4 << " " << newSalary4 << endl;
 
 	// Calculate and display the totals of the first three employees' base salaries vs.
 	// their new salaries.
