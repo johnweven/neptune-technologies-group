@@ -4,11 +4,17 @@
 //*                                                                                                       *
 //* Written by      : Adam Karsner & John Weaver                                                          *
 //*                                                                                                       *
-//* Purpose         :                                                                                     *
+//* Purpose         : The purpose of this program is to read the current salary and salary increase       *
+//*                   of a number of employees from a file, determine each employee's new salary based    *
+//*                   on the input data, and then writes the resulting new salary to a output file.       *
 //*                                                                                                       *
-//* Inputs          :                                                                                     *
+//* Inputs          : A data file containing a number of employee first and last names, their current     *
+//*                   salaries, and the percentages that each employee's salary is to be increased.       *
 //*                                                                                                       *
-//* Outputs         :                                                                                     *
+//* Outputs         : 1. An output file containing the names and new salaries of every employee that      *
+//*                      was processed from the input file.                                               *
+//*                   2. The total of the combined current salaries of the employees.                     *
+//*                   3. The updated total of the combined employee salaries after salary increases.      *
 //*                                                                                                       *
 //* Calls           : No internal or external calls                                                       *
 //*                                                                                                       *
@@ -91,39 +97,33 @@ int main()
 	// salary increase based on the data read, then write each employee's first/last name
 	// and their new salary to the output file.
 
-	cout << fixed << showpoint << setprecision(2);
-
 	// Employee 1:
     inData >> lastName1 >> firstName1 >> currentSalary1 >> percPayIncrease1;
 	newSalary1 = currentSalary1 + (currentSalary1 * (percPayIncrease1 / 100));
 	outData << firstName1 << " " << lastName1 << " " << newSalary1 << endl;
-	cout << firstName1 << " " << lastName1 << " " << newSalary1 << endl;
 
 	// Employee 2:
 	inData >> lastName2 >> firstName2 >> currentSalary2 >> percPayIncrease2;
 	newSalary2 = currentSalary2 + (currentSalary2 * (percPayIncrease2 / 100));
 	outData << firstName2 << " " << lastName2 << " " << newSalary2 << endl;
-	cout << firstName2 << " " << lastName2 << " " << newSalary2 << endl;
 
 	// Employee 3:
 	inData >> lastName3 >> firstName3 >> currentSalary3 >> percPayIncrease3;
 	newSalary3 = currentSalary3 + (currentSalary3 * (percPayIncrease3 / 100));
 	outData << firstName3 << " " << lastName3 << " " << newSalary3 << endl;
-	cout << firstName3 << " " << lastName3 << " " << newSalary3 << endl;
 
 	// Employee 4:
 	inData >> lastName4 >> firstName4 >> currentSalary4 >> percPayIncrease4;
 	newSalary4 = currentSalary4 + (currentSalary4 * (percPayIncrease4 / 100));
 	outData << firstName4 << " " << lastName4 << " " << newSalary4 << endl;
-	cout << firstName4 << " " << lastName4 << " " << newSalary4 << endl;
 
 	// Calculate and display the totals of the first three employees' base salaries vs.
 	// their new salaries.
 	employeeCurrentSalaryTotal = currentSalary1 + currentSalary2 + currentSalary3;
 	employeeNewSalaryTotal = newSalary1 + newSalary2 + newSalary3;
 	cout << fixed << showpoint << setprecision(2);
-	cout << "\t\tCurrent total Salary: $" << employeeCurrentSalaryTotal << endl;
-	cout << "\t\tUpdated total Salary: $" << employeeNewSalaryTotal << endl;
+	cout << "\tCurrent total Salary: $" << employeeCurrentSalaryTotal << endl;
+	cout << "\tUpdated total Salary: $" << employeeNewSalaryTotal << endl;
 	cout << endl;
 
 	// Close input and output files.
